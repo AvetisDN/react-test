@@ -1,16 +1,13 @@
 import React, {Component} from 'react';
 
 class About extends Component {
-    constructor(props) {
-        super(props)
-    }
     componentDidMount() {
-        console.log(this.props)
+        console.log(this.props.match.params)
     }
     render() {
         return (
             <h2>
-                About Page
+                About Page {this.props.match.params.id} {this.props.match.params.page}
             </h2>
         )
     }
