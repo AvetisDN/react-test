@@ -14,13 +14,31 @@ import Post from './components/posts/Post';
 import Posts from './components/posts/Posts';
 import PostsMenu from './components/layout/PostsMenu';
 
+import {Sugar} from 'react-preloaders';
+
 class App extends Component {
   
   constructor(props) {
     super(props)
     this.state = {
-      mainMenu: []
+      mainMenu: [],
+      loading: true
     }
+    this.enablePreloader = this.enablePreloader.bind(this)
+    this.disablePreloader = this.disablePreloader.bind(this)
+  }
+
+  enablePreloader() {
+    if(!this.state.loading)
+      this.setState({
+        loading: true
+      })
+  }
+  disablePreloader() {
+    if(this.state.loading)
+      this.setState({
+        loading: false
+      })
   }
 
   componentDidMount() {
@@ -59,19 +77,20 @@ class App extends Component {
               </div>
               <div className="col-9 py-3">
                 <Switch>
-                  <Route exact path='/' component={Home} />
-                  <Route exact path='/about' component={About} />
-                  <Route exact path='/about/:id' component={About} />
-                  <Route exact path='/about/:id/:page' component={About} />
-                  <Route exact path='/users' component={Users} />
-                  <Route exact path='/posts' component={Posts} />
-                  <Route exact path='/posts/:page' component={Posts} />
-                  <Route exact path='/post/:id' component={Post} />
-                  <Route path='*' component={NotFound} />
+                  <Route exact path='/' component={(props) => <Home {...props} enablePreloader={this.enablePreloader} disablePreloader={this.disablePreloader} /> } />
+                  <Route exact path='/about' component={(props) => <About {...props} enablePreloader={this.enablePreloader} disablePreloader={this.disablePreloader} /> } />
+                  <Route exact path='/about/:id' component={(props) => <About {...props} enablePreloader={this.enablePreloader} disablePreloader={this.disablePreloader} /> } />
+                  <Route exact path='/about/:id/:page' component={(props) => <About {...props} enablePreloader={this.enablePreloader} disablePreloader={this.disablePreloader} /> } />
+                  <Route exact path='/users' component={(props) => <Users {...props} enablePreloader={this.enablePreloader} disablePreloader={this.disablePreloader} /> } />
+                  <Route exact path='/posts' component={(props) => <Posts {...props} enablePreloader={this.enablePreloader} disablePreloader={this.disablePreloader} /> } />
+                  <Route exact path='/posts/:page' component={(props) => <Posts {...props} enablePreloader={this.enablePreloader} disablePreloader={this.disablePreloader} /> } />
+                  <Route exact path='/post/:id' component={(props) => <Post {...props} enablePreloader={this.enablePreloader} disablePreloader={this.disablePreloader} /> } />
+                  <Route path='*' component={(props) => <NotFound {...props} enablePreloader={this.enablePreloader} disablePreloader={this.disablePreloader} /> } />
                 </Switch>
               </div>
             </div>
           </div>
+          <Sugar customLoading={this.state.loading} time={500} color={'#778595'} />
       </Router>
     )
   }

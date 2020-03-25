@@ -12,7 +12,6 @@ class Posts extends Component {
             postsPerPage: 10,
             totalPages: 0
          };
-        //  this.onPageChange = this.onPageChange.bind(this)
     }
     componentDidUpdate(prevProps, prevState) {
         if(this.state.page !== this.props.match.params.page) {
@@ -33,6 +32,7 @@ class Posts extends Component {
             .then( (response)=>{
                 postsAll = response.data;
                 this.paginator(postsAll)
+                this.props.disablePreloader()
             } )
             .catch( (error)=>{
 
@@ -46,25 +46,22 @@ class Posts extends Component {
             totalPages: Math.ceil(arr.length/this.state.postsPerPage)
         })
     }
-    // onPageChange(num) {
-    //     this.setState({
-    //         page: num
-    //     })
-    // }
+
     render() {
+        
         return (
             <div>
                 {this.state.posts.map( (post, index) => {
                     return(
                         <div className="py-3 border-bottom" key={index}>
-                            <NavLink to={`/posts/${post.id}`}>
+                            <NavLink to={`/post/${post.id}`}>
                                 {post.title}
                             </NavLink>
                         </div>
                     )
                 } )}
                 {this.state.posts.length>0 &&
-                <Pagination total={this.state.totalPages} current={this.state.page} urlBase='/posts/' />
+                <Pagination total={this.state.totalPages} current={this.state.page || 1} urlBase='/posts/' />
                 }
                 
             </div>
