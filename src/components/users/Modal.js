@@ -9,13 +9,22 @@ class Modal extends Component {
         return (
             <div className={`my-modal ${this.props.show ? 'show' : ''}`}>
                 <div className="my-modal__header">
-
+                    <h5>{this.props.user.username} &lt;{this.props.user.email}&gt;</h5>
                 </div>
                 <div className="my-modal__body">
-
+                    <p>
+                        Real Name: {this.props.user.name}
+                    </p>
+                    <p>
+                        Phone: {this.props.user.phone}
+                    </p>
+                    <p>
+                        Company: {this.props.user.company && this.props.user.company.name}
+                    </p>
                 </div>
                 <div className="my-modal__footer">
-                    <button className="btn btn-secondary">Close</button>
+                    <button className="modal-close btn btn-secondary"
+                            onClick={() => {this.props.showModal(this.props.user.id)} }>Close</button>
                 </div>
             </div>
         );

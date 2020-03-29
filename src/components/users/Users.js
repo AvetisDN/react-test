@@ -8,15 +8,23 @@ class Users extends Component {
         super(props);
         this.state = { 
             users: [],
+            user: {},
             isModalShow: false
         };
         this.showModal = this.showModal.bind(this)
     }
 
-    showModal() {
-        this.setState({
-            isModalShow: !this.state.isModalShow
-        })
+    showModal(id) {
+        axios.get('https://jsonplaceholder.typicode.com/users/' + id)
+            .then((response) => {
+                this.setState({
+                    user: response.data,
+                    isModalShow: !this.state.isModalShow
+                })
+            })
+            .catch((error) => {
+                console.error(error);
+            })
     }
 
     componentDidMount() {
@@ -25,6 +33,7 @@ class Users extends Component {
                 this.setState({
                     users: response.data
                 })
+                // this.props.disablePreloader()
             })
             .catch((error) => {
                 console.error(error);                
@@ -70,7 +79,7 @@ class Users extends Component {
                         </table>
                     </div>
                 }
-                <Modal show={this.state.isModalShow} />
+                <Modal show={this.state.isModalShow} showModal={this.showModal} user={this.state.user} />
             </div>
         );
     }

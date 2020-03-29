@@ -25,7 +25,22 @@ $font-family-sans-serif: 'Ubuntu', sans-serif;
 
 .my-modal {
     display: none;
+    position: fixed;
+    max-width: 600px;
+    max-height: 400px;
+    overflow-y: auto;
+    background-color: #fff;
+    box-shadow: rgba(0,0,0,.5) 0 5px 25px;
+    top: calc(50vh - 200px);
+    left: calc(50vw - 200px);
     &.show {
         display: block;
+    }
+    &__header, &__footer {
+        background-color: #f3f3f3;
+        padding: 30px;
+    }
+    &__body {
+        padding: 30px;
     }
 }

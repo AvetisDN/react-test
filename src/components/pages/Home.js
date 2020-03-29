@@ -5,7 +5,7 @@ class Home extends Component {
         super(props)
     }
     componentDidMount() {
-        this.props.disablePreloader()
+        //this.props.disablePreloader()
     }
     render() {
         return (

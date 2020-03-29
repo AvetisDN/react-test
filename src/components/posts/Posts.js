@@ -32,7 +32,7 @@ class Posts extends Component {
             .then( (response)=>{
                 postsAll = response.data;
                 this.paginator(postsAll)
-                this.props.disablePreloader()
+                //this.props.disablePreloader()
             } )
             .catch( (error)=>{
 

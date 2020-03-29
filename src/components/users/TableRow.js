@@ -24,7 +24,7 @@ class TableRow extends Component {
                     {this.props.user.email}
                 </td>
                 <td>
-                    <button className="btn btn-sm mr-2 btn-info" onClick={this.props.showModal}>
+                    <button className="btn btn-sm mr-2 btn-info" onClick={() => {this.props.showModal(this.props.user.id)}}>
                         <FontAwesomeIcon icon={faInfoCircle}/>
                     </button>
                     <button className="btn btn-sm btn-danger">
